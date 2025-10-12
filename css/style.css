@@ -574,3 +574,45 @@ header h1 img {
         display: block; /* li 태그는 block 요소이므로 block으로 설정 */
     }
 }
+
+/* ====================================
+   19. 새소식 페이지 스타일
+   ==================================== */
+
+.news-list .news-item {
+    padding: 25px 0;
+    border-bottom: 1px solid var(--light-gray);
+}
+
+.news-list .news-item:first-child {
+    padding-top: 0;
+}
+
+.news-list .news-item:last-child {
+    border-bottom: none;
+}
+
+.news-date {
+    font-size: 0.9em;
+    color: #888;
+    margin-bottom: 8px;
+}
+
+.news-item h2 {
+    margin-bottom: 10px;
+}
+
+.news-item h2 a {
+    text-decoration: none;
+    color: var(--text-color);
+    transition: color 0.3s;
+}
+
+.news-item h2 a:hover {
+    color: var(--main-color);
+}
+
+.news-detail-header {
+    text-align: center;
+    padding: 20px 0;
+}
