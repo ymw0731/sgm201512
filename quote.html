@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>견적 문의 - SGM 에스지엠</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <h1><a href="index.html"><img src="images/logo.png" alt="SGM 에스지엠 로고"></a></h1>
+        <div class="hamburger-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">홈</a></li>
+                <li><a href="about.html">회사소개</a></li>
+                <li><a href="services.html">사업분야</a></li>
+                <li><a href="contact.html">오시는 길</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1>견적 문의</h1>
+        <p style="text-align: center; margin-bottom: 40px;">
+            아래 양식을 작성해주시면 검토 후 신속하게 연락드리겠습니다.<br>
+            도면이나 참고 파일이 있는 경우 함께 첨부해주시면 더욱 정확한 상담이 가능합니다.
+        </p>
+
+        <form action="https://formspree.io/f/YOUR_UNIQUE_ID" method="POST" enctype="multipart/form-data" class="quote-form">
+            <div class="form-group">
+                <label for="company">회사명</label>
+                <input type="text" id="company" name="회사명" required>
+            </div>
+            <div class="form-group">
+                <label for="name">담당자 이름</label>
+                <input type="text" id="name" name="담당자명" required>
+            </div>
+            <div class="form-group">
+                <label for="email">이메일</label>
+                <input type="email" id="email" name="이메일" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">연락처</label>
+                <input type="tel" id="phone" name="연락처" required>
+            </div>
+            <div class="form-group">
+                <label for="inquiry-type">문의 종류</label>
+                <select id="inquiry-type" name="문의종류">
+                    <option value="정밀가공">정밀 가공</option>
+                    <option value="설계및제작">설계 및 제작</option>
+                    <option value="품질관리">품질 관리</option>
+                    <option value="기타">기타</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="details">상세 문의 내용</label>
+                <textarea id="details" name="상세내용" rows="8" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="attachment">파일 첨부 (도면, 참고 파일 등)</label>
+                <input type="file" id="attachment" name="첨부파일">
+            </div>
+            <button type="submit" class="cta-button">견적 요청하기</button>
+        </form>
+    </main>
+
+    <footer>
+        <p>주소: 경상남도 김해시 ...</p>
+        <p>연락처: 055-123-4567 | 이메일: info@abccompany.com</p>
+        <p>대표: OOO</p>
+        <p>&copy; 2025 SGM 에스지엠. All Rights Reserved.</p>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
