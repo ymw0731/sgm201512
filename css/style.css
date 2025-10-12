@@ -558,3 +558,19 @@ header h1 img {
     opacity: 1; /* 완전히 보이게 */
     transform: translateY(0); /* 원래 위치로 이동 */
 }
+
+/* ====================================
+   18. 모바일 전용 메뉴 스타일
+   ==================================== */
+
+/* 평상시(데스크톱)에는 숨김 처리 */
+.mobile-only {
+    display: none;
+}
+
+/* 768px 이하 모바일 화면에서만 다시 보이도록 처리 */
+@media (max-width: 768px) {
+    .mobile-only {
+        display: block; /* li 태그는 block 요소이므로 block으로 설정 */
+    }
+}
