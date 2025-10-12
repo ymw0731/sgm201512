@@ -541,3 +541,20 @@ header h1 img {
     border: none;
     cursor: pointer;
 }
+
+/* ====================================
+   17. 스크롤 애니메이션 스타일
+   ==================================== */
+
+/* 애니메이션이 적용될 요소의 기본 상태 (화면 밖, 투명한 상태) */
+.animate-on-scroll {
+    opacity: 0; /* 처음엔 투명하게 */
+    transform: translateY(20px); /* 살짝 아래로 이동 */
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out; /* 부드러운 전환 효과 */
+}
+
+/* JavaScript에 의해 .visible 클래스가 추가될 때의 상태 (화면 안, 불투명한 상태) */
+.animate-on-scroll.visible {
+    opacity: 1; /* 완전히 보이게 */
+    transform: translateY(0); /* 원래 위치로 이동 */
+}
