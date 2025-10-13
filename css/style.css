@@ -1,95 +1,53 @@
 /* ====================================
-   1. 구글 웹폰트 및 기본 설정 (Reset)
+   01. 구글 웹폰트 및 기본 설정
    ==================================== */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap');
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-/* ====================================
-   2. 색상 및 스타일 변수 정의
-   ==================================== */
 :root {
     --main-color: #005aab;
-    --text-color: #333333;
-    --bg-color: #f7f9fc;
-    --light-gray: #dddddd;
-    --dark-bg: #2c3e50;
+    --text-color: #333;
+    --bg-color: #f9f9f9;
+    --light-gray: #eee;
 }
 
-/* ====================================
-   3. 전체 레이아웃 및 기본 폰트
-   ==================================== */
 body {
     font-family: 'Noto Sans KR', sans-serif;
-    background-color: var(--bg-color);
+    margin: 0;
     color: var(--text-color);
-    line-height: 1.7;
+    line-height: 1.6;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+a {
+    color: var(--main-color);
+    text-decoration: none;
+}
+
+h1, h2, h3 {
+    margin-top: 0;
+}
+
+main {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 0 5%;
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid var(--light-gray);
+    margin: 50px 0;
 }
 
 /* ====================================
-   4. 헤더 및 내비게이션 (메뉴)
+   02. 헤더 (햄버거 메뉴 버전)
    ==================================== */
 header {
-    background-color: white;
-    padding: 20px 50px;
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid var(--light-gray);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-}
-
-header h1 {
-    font-size: 26px;
-    font-weight: 700;
-}
-
-header h1 a {
-    text-decoration: none;
-    color: var(--text-color);
-}
-
-nav ul {
-    list-style: none;
-}
-
-nav ul li {
-    display: inline;
-    margin-left: 30px;
-}
-
-nav a {
-    text-decoration: none;
-    color: var(--text-color);
-    font-size: 16px;
-    font-weight: 700;
-    padding-bottom: 5px;
-    transition: color 0.3s, border-bottom-color 0.3s;
-}
-
-nav a:hover {
-    color: var(--main-color);
-    border-bottom: 2px solid var(--main-color);
-}
-
-nav a.active {
-    color: var(--main-color);
-    border-bottom: 2px solid var(--main-color);
-}
-
-/* ====================================
-   05. 헤더
-   ==================================== */
-header {
-    display: flex;
-    justify-content: space-between; /* 로고와 햄버거 메뉴를 양쪽 끝으로 */
     align-items: center;
     padding: 15px 5%;
     background-color: white;
@@ -108,9 +66,8 @@ header h1 a img {
     vertical-align: middle;
 }
 
-/* 햄버거 메뉴 아이콘 (항상 보이도록 수정) */
 .hamburger-menu {
-    display: flex; /* 이제 기본값이 flex, 항상 보임 */
+    display: flex;
     flex-direction: column;
     justify-content: space-around;
     width: 28px;
@@ -127,7 +84,6 @@ header h1 a img {
     transition: all 0.3s ease;
 }
 
-/* 햄버거 메뉴 클릭 시 X 모양으로 변경 */
 .hamburger-menu.active span:nth-child(1) {
     transform: rotate(45deg) translate(6px, 6px);
 }
@@ -139,15 +95,13 @@ header h1 a img {
 }
 
 /* ====================================
-   06. 내비게이션
+   03. 내비게이션 (슬라이드 패널 버전)
    ==================================== */
-
-/* 내비게이션 메뉴 기본 스타일 (이제 평소에는 보이지 않음) */
 header nav {
     position: fixed;
     top: 0;
-    right: -300px; /* 화면 오른쪽에 숨겨진 상태 */
-    width: 300px; /* 패널 너비를 조금 넓힘 */
+    right: -300px;
+    width: 300px;
     height: 100%;
     background-color: white;
     box-shadow: -2px 0 5px rgba(0,0,0,0.1);
@@ -156,7 +110,6 @@ header nav {
     z-index: 1001;
 }
 
-/* 햄버거 메뉴 클릭 시 .active 클래스가 추가되면서 나타남 */
 header nav.active {
     right: 0;
 }
@@ -165,9 +118,9 @@ header nav ul {
     list-style: none;
     padding: 0;
     margin: 0;
-    display: flex; /* 세로 정렬을 위해 flex 사용 */
-    flex-direction: column; /* 메뉴 항목을 세로로 나열 */
-    align-items: center; /* 가운데 정렬 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 header nav ul li {
@@ -194,495 +147,184 @@ header nav ul li a.active {
     background-color: var(--bg-color);
     color: var(--main-color);
 }
-/* ====================================
-   7. 푸터 (웹사이트 하단)
-   ==================================== */
-footer {
-    background-color: var(--dark-bg);
-    color: white;
-    text-align: center;
-    padding: 30px;
-    line-height: 1.8;
-}
-
-footer p {
-    margin-bottom: 5px;
-    opacity: 0.8;
-}
 
 /* ====================================
-   8. 페이지별 스타일
+   04. 메인 콘텐츠 및 푸터
    ==================================== */
 
-/* --- 8-1. 홈페이지 (index.html) --- */
-.hero {
-    height: 400px;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
+.hero { 
+    position: relative; 
+    width: 100%; 
+    height: 60vh; 
+    overflow: hidden; 
 }
 
-#hero-video {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    min-width: 100%;
-    min-height: 100%;
-    z-index: -1;
+#hero-video { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
 }
 
-.hero-text h1 {
-    font-size: 3em;
-    margin-bottom: 20px;
+.hero-text { 
+    position: absolute; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    color: white; 
+    text-align: center; 
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.7); 
 }
 
-.hero-text p {
-    font-size: 1.2em;
+.services, .strengths, .cta { 
+    text-align: center; 
+    padding: 40px 0; 
 }
 
-.services h2, .strengths h2, .cta h2 {
-    text-align: center;
-    font-size: 2em;
-    margin-bottom: 40px;
+.service-items { 
+    display: flex; 
+    justify-content: space-around; 
+    flex-wrap: wrap; 
+    margin-top: 30px; 
 }
 
-.service-items {
-    display: flex;
-    justify-content: space-around;
-    text-align: center;
+.service-item { 
+    width: 30%; 
+    min-width: 250px; 
+    margin-bottom: 20px; 
 }
 
-.service-item {
-    width: 30%;
+.strengths ul { 
+    list-style: none; 
+    padding: 0; 
+    display: inline-block; 
+    text-align: left; 
 }
 
-.service-item img {
-    width: 80px;
-    height: 80px;
-    margin-bottom: 20px;
+.cta-button { 
+    background-color: var(--main-color); 
+    color: white; 
+    padding: 12px 25px; 
+    border-radius: 5px; 
+    text-decoration: none; 
+    font-weight: bold; 
+    transition: background-color 0.3s; 
 }
 
-.strengths ul {
-    list-style: none;
-    padding: 0;
-    max-width: 600px;
-    margin: 0 auto;
-    font-size: 1.1em;
+.cta-button:hover { 
+    background-color: #004a8c; 
 }
 
-.strengths ul li {
-    margin-bottom: 15px;
+footer { 
+    background-color: #333; 
+    color: white; 
+    text-align: center; 
+    padding: 20px 5%; 
+    font-size: 0.9em; 
 }
 
-.cta {
-    text-align: center;
-    padding: 40px 0;
+/* ====================================
+   05. 페이지별 스타일
+   ==================================== */
+
+/* --- 회사소개 페이지 --- */
+.about-section { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    gap: 40px; 
+    flex-wrap: wrap; 
 }
 
-.cta p {
-    margin-bottom: 30px;
+.greeting-text, .greeting-image { 
+    flex: 1; 
+    min-width: 300px; 
 }
 
-.cta-button {
-    background-color: var(--main-color);
-    color: white;
-    padding: 15px 30px;
-    border-radius: 5px;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 1.1em;
-    transition: background-color 0.3s;
+.greeting-image img { 
+    width: 100%; 
+    border-radius: 8px; 
 }
 
-.cta-button:hover {
-    background-color: #004182;
-}
-
-/* --- 8-2. 회사소개 (about.html) --- */
-.about-section {
-    margin-bottom: 50px;
-    padding: 20px;
-}
-
-.greeting {
-    display: flex;
-    align-items: center;
-    gap: 40px;
-}
-
-.greeting-text {
-    flex: 2;
-}
-
-.greeting-image {
-    flex: 1;
-    text-align: center;
-}
-
-.greeting-image img {
-    max-width: 250px;
-    border-radius: 50%;
-    border: 5px solid var(--bg-color);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
-
-.philosophy h2, .history h2 {
-    text-align: center;
-}
-
-.philosophy-items {
-    display: flex;
-    justify-content: space-around;
-    text-align: center;
-    margin-top: 40px;
+.philosophy-items { 
+    display: flex; 
+    justify-content: space-around; 
+    text-align: center; 
+    flex-wrap: wrap;
 }
 
 .philosophy-item {
-    width: 30%;
-}
-
-.philosophy-item img {
-    width: 70px;
-    height: 70px;
-    margin-bottom: 15px;
-}
-
-.history-list {
-    list-style: none;
-    padding: 0;
-    margin: 40px auto;
-    max-width: 600px;
-    border-left: 3px solid var(--main-color);
-    padding-left: 30px;
-}
-
-.history-list li {
-    margin-bottom: 20px;
-    position: relative;
-}
-
-.history-list li::before {
-    content: '';
-    display: block;
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background-color: var(--main-color);
-    position: absolute;
-    left: -37.5px;
-    top: 5px;
-}
-
-/* --- 8-3. 사업분야 (services.html) --- */
-.service-block {
-    display: flex;
-    gap: 40px;
-    align-items: center;
-    margin-bottom: 50px;
-    background-color: var(--bg-color);
-    padding: 30px;
-    border-radius: 8px;
-}
-
-.service-block.reverse {
-    flex-direction: row-reverse;
-}
-
-.service-image {
-    flex: 1;
-}
-
-.service-image img {
-    width: 100%;
-    border-radius: 8px;
-}
-
-.service-content {
-    flex: 1;
-}
-
-.service-content h3 {
-    font-size: 1.8em;
-    color: var(--main-color);
-}
-
-.service-content ul {
-    list-style: none;
-    padding: 0;
-    margin-top: 20px;
-}
-
-.service-content ul li {
-    padding-left: 20px;
-    position: relative;
-    margin-bottom: 10px;
-}
-
-.service-content ul li::before {
-    content: '✔';
-    color: var(--main-color);
-    position: absolute;
-    left: 0;
-}
-
-/* --- 8-4. 오시는 길 (contact.html) --- */
-#daumRoughmapContainer1760232460906 {
-    border: 1px solid var(--light-gray);
-    border-radius: 8px;
-    display: block;
-}
-
-#daumRoughmapContainer1760232460906 iframe {
-    vertical-align: bottom;
-}
-
-/* ====================================
-   9. 로고 및 햄버거 메뉴
-   ==================================== */
-header h1 img {
-    height: 40px;
-    width: auto;
-    vertical-align: middle;
-}
-
-.hamburger-menu {
-    display: none;
-    cursor: pointer;
-    z-index: 102;
-}
-
-.hamburger-menu span {
-    display: block;
-    width: 25px;
-    height: 3px;
-    background-color: var(--text-color);
-    border-radius: 3px;
-    transition: all 0.3s ease-in-out;
-}
-
-.hamburger-menu span:not(:last-child) {
-    margin-bottom: 5px;
-}
-
-/* ====================================
-   10. 반응형 웹 디자인 (미디어 쿼리)
-   ==================================== */
-
-/* --- 10-1. 태블릿 및 일반 모바일 (768px 이하) --- */
-@media (max-width: 768px) {
-    
-    header {
-        justify-content: center;
-        padding: 15px 20px;
-    }
-
-    .hamburger-menu {
-        display: block;
-        position: absolute;
-        left: 20px;
-        top: 50%;
-        transform: translateY(-50%);
-    }
-
-    nav {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        justify-content: flex-start;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 280px;
-        height: 100vh;
-        background-color: white;
-        box-shadow: 2px 0 10px rgba(0,0,0,0.1);
-        padding-top: 80px;
-        padding-left: 30px;
-        transform: translateX(-100%);
-        transition: transform 0.3s ease-in-out;
-        z-index: 101;
-    }
-
-    nav.nav-active {
-        transform: translateX(0);
-    }
-
-    nav ul li {
-        display: block;
-        margin: 15px 0;
-    }
-
-    nav a {
-        font-size: 1.5em;
-        font-weight: bold;
-        border-bottom: none;
-    }
-
-    nav a:hover,
-    nav a.active {
-        border-bottom: none;
-    }
-
-    main {
-        margin: 20px auto;
-        padding: 15px;
-        min-height: auto;
-    }
-    
-    .hero {
-        height: 300px;
-    }
-    
-    .hero-text h1 {
-        font-size: 2em;
-        word-break: keep-all;
-    }
-    
-    .hero-text p {
-        font-size: 1em;
-    }
-
-    .service-items, .philosophy-items {
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    .service-item, .philosophy-item {
-        width: 80%;
-        margin-bottom: 30px;
-    }
-    
-    .services h2, .strengths h2, .cta h2 {
-        font-size: 1.5em;
-    }
-
-    #daumRoughmapContainer1760232460906 {
-        width: 100% !important;
-    }
-    
-    .greeting {
-        flex-direction: column-reverse;
-    }
-    
-    .service-block, .service-block.reverse {
-        flex-direction: column;
-    }
-}
-
-/* --- 10-2. 아주 작은 화면 (480px 이하) --- */
-@media (max-width: 480px) {
-    /* 이 구간은 Z-Fold 등 매우 좁은 화면을 위한 미세 조정 공간입니다. */
-    /* 현재는 큰 문제가 없어 비워두지만, 필요시 스타일 추가 가능. */
-    /* 예: body { font-size: 14px; } */
-}
-
-/* ====================================
-   16. 견적 문의(quote.html) 폼 스타일
-   ==================================== */
-
-.quote-form {
-    max-width: 700px;
-    margin: 0 auto; /* 폼을 페이지 중앙에 배치 */
-}
-
-.form-group {
+    min-width: 250px;
     margin-bottom: 20px;
 }
 
-.form-group label {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 8px;
+.history-list { 
+    list-style: none; 
+    padding: 0; 
 }
 
-.form-group input,
-.form-group select,
-.form-group textarea {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid var(--light-gray);
-    border-radius: 5px;
-    font-size: 16px;
-    font-family: 'Noto Sans KR', sans-serif;
+.history-list li { 
+    padding: 10px 0; 
+    border-bottom: 1px solid var(--light-gray); 
 }
 
-.form-group input[type="file"] {
-    padding: 5px;
+/* --- 사업분야 페이지 --- */
+.service-block { 
+    display: flex; 
+    gap: 30px; 
+    margin-bottom: 50px; 
+    align-items: center; 
+    flex-wrap: wrap; 
 }
 
-.quote-form .cta-button {
-    width: 100%;
-    border: none;
-    cursor: pointer;
+.service-block.reverse { 
+    flex-direction: row-reverse; 
 }
 
-/* ====================================
-   17. 스크롤 애니메이션 스타일
-   ==================================== */
-
-/* 애니메이션이 적용될 요소의 기본 상태 (화면 밖, 투명한 상태) */
-.animate-on-scroll {
-    opacity: 0; /* 처음엔 투명하게 */
-    transform: translateY(20px); /* 살짝 아래로 이동 */
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out; /* 부드러운 전환 효과 */
+.service-image, .service-content { 
+    flex: 1; 
+    min-width: 300px; 
 }
 
-/* JavaScript에 의해 .visible 클래스가 추가될 때의 상태 (화면 안, 불투명한 상태) */
-.animate-on-scroll.visible {
-    opacity: 1; /* 완전히 보이게 */
-    transform: translateY(0); /* 원래 위치로 이동 */
+.service-image img { 
+    width: 100%; 
+    border-radius: 8px; 
 }
 
-/* ====================================
-   18. 모바일 전용 메뉴 스타일
-   ==================================== */
-
-/* 평상시(데스크톱)에는 숨김 처리 */
-.mobile-only {
-    display: none;
+/* --- 견적문의 페이지 --- */
+.quote-form { 
+    max-width: 700px; 
+    margin: 0 auto; 
 }
 
-/* 768px 이하 모바일 화면에서만 다시 보이도록 처리 */
-@media (max-width: 768px) {
-    .mobile-only {
-        display: block; /* li 태그는 block 요소이므로 block으로 설정 */
-    }
+.form-group { 
+    margin-bottom: 20px; 
 }
 
-/* ====================================
-   19. 새소식 페이지 스타일
-   ==================================== */
-
-.news-list .news-item {
-    padding: 25px 0;
-    border-bottom: 1px solid var(--light-gray);
+label { 
+    display: block; 
+    margin-bottom: 5px; 
+    font-weight: bold; 
 }
 
-.news-list .news-item:first-child {
-    padding-top: 0;
+input[type="text"], 
+input[type="email"], 
+input[type="tel"], 
+textarea, 
+select { 
+    width: 100%; 
+    padding: 10px; 
+    border: 1px solid #ccc; 
+    border-radius: 4px; 
 }
 
-.news-list .news-item:last-child {
-    border-bottom: none;
+/* --- 새소식 페이지 --- */
+.news-list .news-item { 
+    padding: 25px 0; 
+    border-bottom: 1px solid var(--light-gray); 
 }
 
-.news-date {
-    font-size: 0.9em;
-    color: #888;
-    margin-bottom: 8px;
-}
-
-.news-item h2 {
-    margin-bottom: 10px;
-}
-
-.news-item h2 a {
-    text-decoration: none;
+.news-item h2 a { 
+    text-decoration: none; 
     color: var(--text-color);
     transition: color 0.3s;
 }
@@ -691,89 +333,63 @@ header h1 img {
     color: var(--main-color);
 }
 
-.news-detail-header {
-    text-align: center;
-    padding: 20px 0;
+.news-date {
+    font-size: 0.9em;
+    color: #888;
+    margin-bottom: 8px;
+}
+
+.news-detail-header { 
+    text-align: center; 
+    padding-bottom: 20px;
 }
 
 /* ====================================
-   20. 폼 유효성 검사 스타일
+   06. 추가 기능 스타일
    ==================================== */
 
-/* 입력 필드에 에러가 있을 때 테두리를 빨갛게 표시 */
-.input-error {
-    border-color: #e74c3c; /* 빨간색 테두리 */
+/* --- 스크롤 애니메이션 --- */
+.animate-on-scroll { 
+    opacity: 0; 
+    transform: translateY(20px); 
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out; 
 }
 
-/* 에러 메시지 기본 스타일 (평소엔 숨김) */
-.error-message {
-    color: #e74c3c; /* 빨간색 글씨 */
-    font-size: 0.85em;
-    margin-top: 5px;
-    display: none; /* 평소에는 보이지 않게 처리 */
+.animate-on-scroll.visible { 
+    opacity: 1; 
+    transform: translateY(0); 
 }
 
-/* 에러 메시지가 보여질 때 */
-.error-message.visible {
-    display: block; /* 보이게 처리 */
+/* --- 모바일 전용 메뉴 --- */
+.mobile-only { 
+    display: none; 
+}
+
+/* --- 폼 유효성 검사 --- */
+.input-error { 
+    border-color: #e74c3c !important; 
+}
+
+.error-message { 
+    color: #e74c3c; 
+    font-size: 0.85em; 
+    margin-top: 5px; 
+    display: none; 
+}
+
+.error-message.visible { 
+    display: block; 
 }
 
 /* ====================================
-   21. 드롭다운 메뉴 스타일
+   07. 반응형 디자인 (미디어 쿼리)
    ==================================== */
-
-/* 드롭다운 기능을 감싸는 부모 li 요소 */
-.dropdown {
-    position: relative; /* 하위 메뉴의 위치 기준점이 됨 */
-}
-
-/* 하위 메뉴 리스트 (평소엔 숨김) */
-.dropdown-content {
-    display: none;
-    position: absolute; /* 부모 요소를 기준으로 위치를 잡음 */
-    top: 100%; /* 부모 메뉴 바로 아래에 위치 */
-    left: 0;
-    background-color: white;
-    min-width: 160px; /* 최소 너비 */
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.1);
-    z-index: 1;
-    list-style: none; /* li 태그의 점 제거 */
-    border-radius: 0 0 5px 5px;
-    opacity: 0; /* 투명한 상태에서 나타나는 효과를 위함 */
-    transform: translateY(-10px);
-    transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-/* 하위 메뉴 안의 링크 스타일 */
-.dropdown-content li a {
-    color: var(--text-color);
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-    text-align: left;
-    border-bottom: none; /* 기본 메뉴의 밑줄 제거 */
-}
-
-.dropdown-content li a:hover {
-    background-color: var(--bg-color);
-    border-bottom: none;
-}
-
-/* 데스크톱: 부모 메뉴에 마우스를 올렸을 때 하위 메뉴를 보여줌 */
-@media (min-width: 769px) {
-    .dropdown:hover .dropdown-content {
-        display: block;
-        opacity: 1;
-        transform: translateY(0);
+@media (max-width: 768px) { 
+    .mobile-only { 
+        display: block; 
+    } 
+    
+    .service-items, .about-section, .service-block, .service-block.reverse {
+        flex-direction: column;
     }
-}
-
-/* 모바일: JavaScript로 .show 클래스가 추가될 때 하위 메뉴를 보여줌 */
-.dropdown-content.show {
-    display: block;
-    opacity: 1;
-    transform: translateY(0);
-    position: static; /* 모바일에서는 자연스럽게 아래로 펼쳐지도록 */
-    box-shadow: none;
-    background-color: #f1f1f1;
 }
