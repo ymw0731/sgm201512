@@ -15,15 +15,22 @@
             <span></span>
         </div>
         <nav>
-            <ul>
-                <li><a href="index.html">홈</a></li>
-                <li><a href="about.html">회사소개</a></li>
-                <li><a href="services.html">사업분야</a></li>
-                <li><a href="contact.html" class="active">오시는 길</a></li>
-                <li><a href="news.html">새소식</a></li>
-                <li class="mobile-only"><a href="quote.html">문의하기</a></li>
+    <ul>
+        <li><a href="index.html">홈</a></li>
+        <li class="dropdown">
+            <a href="about.html" class="dropdown-toggle">회사소개</a>
+            <ul class="dropdown-content">
+                <li><a href="about.html#greeting">인사말</a></li>
+                <li><a href="about.html#philosophy">핵심가치</a></li>
+                <li><a href="about.html#history">회사연혁</a></li>
             </ul>
-        </nav>
+        </li>
+        <li><a href="services.html">사업분야</a></li>
+        <li><a href="news.html">새소식</a></li>
+        <li><a href="contact.html">오시는 길</a></li>
+        <li class="mobile-only"><a href="quote.html">문의하기</a></li>
+    </ul>
+</nav>
     </header>
 
     <main class="animate-on-scroll">
