@@ -37,3 +37,84 @@ const observer = new IntersectionObserver((entries) => {
 animatedElements.forEach(element => {
     observer.observe(element);
 });
+
+/* ====================================
+   폼 유효성 검사 스크립트
+   ==================================== */
+
+// 견적 문의 폼이 있는 페이지에서만 이 코드가 실행되도록 합니다.
+const quoteForm = document.querySelector('.quote-form');
+
+if (quoteForm) {
+    // 폼과 각 입력 필드, 에러 메시지 공간을 변수로 지정
+    const companyInput = document.getElementById('company');
+    const nameInput = document.getElementById('name');
+    const emailInput = document.getElementById('email');
+    const phoneInput = document.getElementById('phone');
+    const detailsInput = document.getElementById('details');
+
+    // 이메일 형식을 검사하는 정규 표현식 (일종의 마법 주문)
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    // '제출(submit)' 이벤트가 발생했을 때 실행될 함수
+    quoteForm.addEventListener('submit', function(event) {
+        let isValid = true; // 폼이 유효한지 여부를 저장하는 변수
+
+        // 헬퍼 함수: 에러를 보여주거나 숨기는 역할
+        function showError(input, message) {
+            const errorDiv = input.nextElementSibling;
+            input.classList.add('input-error');
+            errorDiv.textContent = message;
+            errorDiv.classList.add('visible');
+            isValid = false;
+        }
+        function hideError(input) {
+            const errorDiv = input.nextElementSibling;
+            input.classList.remove('input-error');
+            errorDiv.classList.remove('visible');
+        }
+
+        // --- 각 필드 검사 시작 ---
+
+        // 회사명 검사 (비어있는지 확인)
+        if (companyInput.value.trim() === '') {
+            showError(companyInput, '회사명을 입력해주세요.');
+        } else {
+            hideError(companyInput);
+        }
+
+        // 담당자 이름 검사 (비어있는지 확인)
+        if (nameInput.value.trim() === '') {
+            showError(nameInput, '담당자 이름을 입력해주세요.');
+        } else {
+            hideError(nameInput);
+        }
+        
+        // 이메일 검사 (형식이 맞는지 확인)
+        if (!emailRegex.test(emailInput.value)) {
+            showError(emailInput, '올바른 이메일 주소를 입력해주세요.');
+        } else {
+            hideError(emailInput);
+        }
+
+        // 연락처 검사 (비어있는지 확인)
+        if (phoneInput.value.trim() === '') {
+            showError(phoneInput, '연락처를 입력해주세요.');
+        } else {
+            hideError(phoneInput);
+        }
+
+        // 상세 내용 검사 (비어있는지 확인)
+        if (detailsInput.value.trim() === '') {
+            showError(detailsInput, '상세 문의 내용을 입력해주세요.');
+        } else {
+            hideError(detailsInput);
+        }
+
+        // --- 최종 결정 ---
+        // 만약 유효하지 않은 필드가 하나라도 있다면, 폼 제출을 막음
+        if (!isValid) {
+            event.preventDefault();
+        }
+    });
+}
