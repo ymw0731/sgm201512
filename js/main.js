@@ -91,3 +91,28 @@ if (quoteForm) {
         }
     });
 }
+
+/* ====================================
+   쿠키 정책 동의 배너 스크립트
+   ==================================== */
+document.addEventListener('DOMContentLoaded', () => {
+    const consentBanner = document.getElementById('cookie-consent-banner');
+    const agreeButton = document.getElementById('cookie-consent-agree');
+
+    // 1. 사용자가 이미 동의했는지 확인
+    // 브라우저의 localStorage에 'cookieConsent' 값이 'agreed'로 저장되어 있는지 봅니다.
+    if (localStorage.getItem('cookieConsent') === 'agreed') {
+        // 이미 동의했다면, 배너에 'hidden' 클래스를 추가해 바로 숨깁니다.
+        consentBanner.classList.add('hidden');
+    }
+
+    // 2. '동의하고 닫기' 버튼을 클릭했을 때의 동작 설정
+    agreeButton.addEventListener('click', () => {
+        // 배너에 'hidden' 클래스를 추가해 아래로 사라지는 애니메이션을 실행합니다.
+        consentBanner.classList.add('hidden');
+        
+        // 사용자의 동의 선택을 브라우저에 저장합니다.
+        // 이렇게 하면 다음 방문 시에는 1번 조건문에 걸려 배너가 나타나지 않습니다.
+        localStorage.setItem('cookieConsent', 'agreed');
+    });
+});

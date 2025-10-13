@@ -505,3 +505,55 @@ header nav ul li.quote-link a:hover {
     background-color: #004a8c;
     color: white;
 }
+
+/* ====================================
+   08. 쿠키 정책 동의 배너 스타일
+   ==================================== */
+
+#cookie-consent-banner {
+    position: fixed; /* 화면에 고정 */
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #2c3e50; /* 어두운 남색 배경 */
+    color: white;
+    padding: 20px;
+    box-shadow: 0 -2px 5px rgba(0,0,0,0.2);
+    z-index: 2000; /* 다른 요소들보다 항상 위에 있도록 */
+
+    display: flex; /* 텍스트와 버튼을 수평 정렬 */
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap; /* 화면이 좁아지면 줄바꿈 */
+    gap: 20px; /* 텍스트와 버튼 사이 간격 */
+
+    /* JavaScript로 .hidden 클래스가 추가되면 숨겨짐 */
+    transform: translateY(0);
+    transition: transform 0.5s ease;
+}
+
+#cookie-consent-banner.hidden {
+    transform: translateY(100%); /* 아래로 사라지는 애니메이션 */
+}
+
+#cookie-consent-banner p {
+    margin: 0;
+    font-size: 0.9em;
+    text-align: center;
+}
+
+#cookie-consent-banner button {
+    background-color: var(--main-color);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    white-space: nowrap; /* 버튼 텍스트 줄바꿈 방지 */
+    transition: background-color 0.3s;
+}
+
+#cookie-consent-banner button:hover {
+    background-color: #004a8c;
+}
