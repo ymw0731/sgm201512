@@ -91,7 +91,7 @@ header h1 a img {
     opacity: 0;
 }
 .hamburger-menu.active span:nth-child(3) {
-    transform: rotate(-45deg) translate(7px, -7px);
+    transform: rotate(-45deg) translate(6px, -6px);
 }
 
 /* ====================================
@@ -226,45 +226,75 @@ footer {
    05. 페이지별 스타일
    ==================================== */
 
-/* --- 회사소개 페이지 --- */
-.about-section { 
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center; 
-    gap: 40px; 
-    flex-wrap: wrap; 
+/* --- 회사소개 페이지 (타임라인 스타일 추가) --- */
+.history-timeline {
+    position: relative;
+    margin: 50px 0;
+    padding: 80px 0; /* 이 줄을 추가해주세요 */
 }
 
-.greeting-text, .greeting-image { 
-    flex: 1; 
-    min-width: 300px; 
+/* 중앙을 가로지르는 선 */
+.history-timeline ul::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 4px;
+    background-color: var(--light-gray);
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
 }
 
-.greeting-image img { 
-    width: 100%; 
-    border-radius: 8px; 
+.history-timeline ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
 }
 
-.philosophy-items { 
-    display: flex; 
-    justify-content: space-around; 
-    text-align: center; 
-    flex-wrap: wrap;
+.history-timeline li {
+    position: relative;
+    width: 20%; /* 5개 항목이므로 100% / 5 = 20% */
+    text-align: center;
+    padding: 20px 0;
 }
 
-.philosophy-item {
-    min-width: 250px;
-    margin-bottom: 20px;
+/* 타임라인 위의 점(dot) */
+.history-timeline li::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    border: 4px solid var(--main-color);
+    border-radius: 50%;
+    z-index: 1;
 }
 
-.history-list { 
-    list-style: none; 
-    padding: 0; 
+.timeline-content {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 150px;
 }
 
-.history-list li { 
-    padding: 10px 0; 
-    border-bottom: 1px solid var(--light-gray); 
+.timeline-content strong {
+    font-size: 1.2em;
+    font-weight: 700;
+}
+
+/* 홀수 번째 항목은 아래로 */
+.history-timeline li:nth-child(odd) .timeline-content {
+    top: 80px;
+}
+
+/* 짝수 번째 항목은 위로 */
+.history-timeline li:nth-child(even) .timeline-content {
+    bottom: 80px;
 }
 
 /* --- 사업분야 페이지 --- */
@@ -274,6 +304,43 @@ footer {
     margin-bottom: 50px; 
     align-items: center; 
     flex-wrap: wrap; 
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.service-block.reverse { 
+    flex-direction: row-reverse; 
+}
+
+.service-image, .service-content { 
+    flex: 1; 
+    min-width: 300px; 
+}
+
+.service-image img { 
+    width: 100%; 
+    border-radius: 8px; 
+}
+
+.service-content ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+}
+
+.service-content ul li {
+    padding-left: 20px;
+    position: relative;
+    margin-bottom: 10px;
+}
+
+.service-content ul li::before {
+    content: '✔';
+    color: var(--main-color);
+    position: absolute;
+    left: 0;
 }
 
 .service-block.reverse { 
@@ -384,12 +451,57 @@ select {
 /* ====================================
    07. 반응형 디자인 (미디어 쿼리)
    ==================================== */
+
 @media (max-width: 768px) { 
-    .mobile-only { 
-        display: block; 
-    } 
-    
-    .service-items, .about-section, .service-block, .service-block.reverse {
-        flex-direction: column;
+    /* ... (기존 반응형 코드) ... */
+
+    /* --- 타임라인 반응형 스타일 --- */
+    .history-timeline ul {
+        flex-direction: column; /* 세로로 쌓기 */
+        padding-left: 20px;
     }
+    .history-timeline ul::after {
+        /* 세로선으로 변경 */
+        width: 4px;
+        height: 100%;
+        left: 20px;
+        top: 0;
+        transform: translateX(-50%);
+    }
+    .history-timeline li {
+        width: 100%;
+        text-align: left;
+        padding-left: 40px;
+        margin-bottom: 30px;
+    }
+    .history-timeline li:nth-child(odd) .timeline-content,
+    .history-timeline li:nth-child(even) .timeline-content {
+        /* 위치 초기화 */
+        position: static;
+        transform: none;
+        width: auto;
+    }
+    .history-timeline li::before {
+        /* 점 위치 조정 */
+        left: 20px;
+        top: 5px;
+    }
+}
+
+/* style.css의 내비게이션 섹션 맨 아래에 추가 */
+
+/* --- 문의하기 버튼 스타일 --- */
+header nav ul li.quote-link a {
+    background-color: var(--main-color);
+    color: white;
+    font-weight: bold;
+    margin: 15px 20px;
+    border-radius: 5px;
+    border-bottom: none;
+    transition: background-color 0.3s;
+}
+
+header nav ul li.quote-link a:hover {
+    background-color: #004a8c;
+    color: white;
 }
