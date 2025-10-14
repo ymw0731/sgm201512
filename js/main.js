@@ -116,3 +116,50 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('cookieConsent', 'agreed');
     });
 });
+
+/* ====================================
+   GSAP 애니메이션 스크립트
+   ==================================== */
+
+// GSAP 플러그인 등록 (스크롤트리거를 사용하기 위해 필수)
+gsap.registerPlugin(ScrollTrigger);
+
+// 1. 첫 화면 히어로 텍스트 애니메이션
+const heroText = document.querySelector('.hero-text h1');
+
+// 텍스트를 한 글자씩 <span>으로 감싸주는 작업
+if (heroText) {
+    const heroTextChars = heroText.textContent.split('');
+    heroText.innerHTML = heroTextChars.map(char => `<span>${char}</span>`).join('');
+    
+    // GSAP 애니메이션 적용
+    gsap.fromTo(heroText.querySelectorAll('span'), 
+        { opacity: 0, y: 50 }, // 시작 상태 (투명하고, 50px 아래에)
+        { 
+            opacity: 1, 
+            y: 0, 
+            duration: 1, // 애니메이션 지속 시간
+            ease: 'power3.out', // 애니메이션 효과
+            stagger: 0.05, // 각 글자 사이의 지연 시간
+            scrollTrigger: {
+                trigger: '.hero',
+                start: 'top center', // .hero 섹션이 화면 중앙에 오면 시작
+                toggleActions: 'play none none none'
+            }
+        }
+    );
+}
+
+// 2. 스크롤 연동 카드 애니메이션
+gsap.from('.service-item', {
+    scrollTrigger: {
+        trigger: '.services', // .services 섹션이 트리거
+        start: 'top 80%', // 섹션의 상단이 뷰포트 80% 지점에 닿으면 시작
+        toggleActions: 'play none none none'
+    },
+    opacity: 0, // 처음엔 투명
+    y: 50, // 50px 아래에서 시작
+    duration: 1,
+    ease: 'power3.out',
+    stagger: 0.3 // 0.3초 간격으로 순차적으로 나타남
+});
