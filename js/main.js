@@ -163,3 +163,62 @@ gsap.from('.service-item', {
     ease: 'power3.out',
     stagger: 0.3 // 0.3초 간격으로 순차적으로 나타남
 });
+
+/* ====================================
+   Contentful (Headless CMS) 연동 스크립트 (수정본)
+   ==================================== */
+
+if (document.querySelector('.news-list')) {
+    const newsListContainer = document.querySelector('.news-list');
+
+    const SPACE_ID = '여러분의 Space ID';
+    const ACCESS_TOKEN = '여러분의 Access Token';
+    const contentType = 'newsPost'; // 1번 단계에서 확인한 정확한 API ID를 입력하세요.
+
+    const url = `https://cdn.contentful.com/spaces/${'fj5xjtw9kg54'}/environments/master/entries?access_token=${'mCAOJhe52y_OJs6yvjd4xav_lglNodtmtjPZdg4X8s0'}&content_type=${'newsPost'}`;
+
+    fetch(url)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            newsListContainer.innerHTML = '';
+
+            if (!data.items || data.items.length === 0) {
+                newsListContainer.innerHTML = '<p>아직 등록된 새소식이 없습니다.</p>';
+                return;
+            }
+
+            data.items.forEach(item => {
+                const fields = item.fields;
+
+                const date = new Date(fields.publishedDate);
+                const formattedDate = `${date.getFullYear()}년 ${date.getMonth() + 1}월 ${date.getDate()}일`;
+
+                let summary = '본문 요약이 없습니다.';
+                if (fields.content && fields.content.content && fields.content.content[0] && fields.content.content[0].content && fields.content.content[0].content[0]) {
+                    summary = fields.content.content[0].content[0].value.substring(0, 100) + '...';
+                }
+
+                const article = document.createElement('article');
+                article.classList.add('news-item', 'animate-on-scroll');
+
+                article.innerHTML = `
+                    <p class="news-date">${formattedDate}</p>
+                    <h2><a href="#">${fields.title}</a></h2>
+                    <p>${summary}</p> 
+                `;
+
+                newsListContainer.appendChild(article);
+            });
+
+            ScrollTrigger.refresh();
+        })
+        .catch(error => {
+            console.error('콘텐츠를 불러오는 데 실패했습니다:', error);
+            newsListContainer.innerHTML = '<p>새소식을 불러오는 데 문제가 발생했습니다. (API ID 또는 키를 확인해주세요)</p>';
+        });
+}
