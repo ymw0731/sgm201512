@@ -171,11 +171,12 @@ gsap.from('.service-item', {
 if (document.querySelector('.news-list')) {
     const newsListContainer = document.querySelector('.news-list');
 
-    const SPACE_ID = '여러분의 Space ID';
-    const ACCESS_TOKEN = '여러분의 Access Token';
-    const contentType = 'newsPost'; // 1번 단계에서 확인한 정확한 API ID를 입력하세요.
+    const SPACE_ID = 'fj5xjtw9kg54'; // 여기에 ID 입력
+const ACCESS_TOKEN = 'mCAOJhe52y_OJs6yvjd4xav_lglNodtmtjPZdg4X8s0'; // 여기에 토큰 입력
+const contentType = 'newsPost';
 
-    const url = `https://cdn.contentful.com/spaces/${'fj5xjtw9kg54'}/environments/master/entries?access_token=${'mCAOJhe52y_OJs6yvjd4xav_lglNodtmtjPZdg4X8s0'}&content_type=${'newsPost'}`;
+// url을 만들 때 위에서 선언한 변수들을 사용
+const url = `https://cdn.contentful.com/spaces/${SPACE_ID}/environments/master/entries?access_token=${ACCESS_TOKEN}&content_type=${contentType}`;
 
     fetch(url)
         .then(response => {
