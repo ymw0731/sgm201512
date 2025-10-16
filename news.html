@@ -50,6 +50,86 @@
         <p>&copy; 2025 SGM 에스지엠. All Rights Reserved.</p>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/contentful@latest/dist/contentful.browser.min.js"></script>
+    <script>
+        const spaceId = 'fj5xjtw9kg54';
+        // const accessToken = 'SrCHFk0uLcdqgWhJmyCf-rU0n1QhogYGBUg2iBSz8rI'; // Delivery API
+        const accessToken = 'PuwCfNG-m6LGf4cAUX_D2vuvO1Y9Vh5TXtwJ_glPoeE'; // Preview API
+
+        const client = contentful.createClient({
+            space: spaceId,
+            accessToken: accessToken,
+            host: 'preview.contentful.com'
+        });
+
+        const newsListContainer = document.querySelector('.news-list');
+
+        client.getEntries({ content_type: 'newsPost', order: '-fields.newsPost' }) // 'newsPost' 날짜 필드 기준으로 최신순 정렬
+            .then((response) => {
+                newsListContainer.innerHTML = ''; // '불러오는 중' 메시지 제거
+                if (response.items.length > 0) {
+                    response.items.forEach((item) => {
+                        const newsItem = document.createElement('div');
+                        newsItem.classList.add('news-item');
+
+                        const titleWrapper = document.createElement('div');
+                        titleWrapper.classList.add('news-title-wrapper');
+
+                        const title = document.createElement('h3');
+                        title.textContent = item.fields.newsPost1;
+
+                        const date = document.createElement('p');
+                        date.classList.add('news-date');
+                        const postDate = item.fields.newsPost ? new Date(item.fields.newsPost) : new Date(item.sys.createdAt);
+                        date.textContent = postDate.toLocaleDateString('ko-KR');
+                        
+                        titleWrapper.appendChild(title);
+                        titleWrapper.appendChild(date);
+
+                        const content = document.createElement('div');
+                        content.classList.add('news-content');
+                        content.style.display = 'none'; // 내용을 기본적으로 숨김
+
+                        // Rich Text 내용을 HTML로 변환
+                        if (item.fields.newsPost2) {
+                            item.fields.newsPost2.content.forEach(node => {
+                                if (node.nodeType === 'paragraph') {
+                                    const p = document.createElement('p');
+                                    let textContent = '';
+                                    if (node.content) {
+                                        node.content.forEach(textNode => {
+                                            if (textNode.nodeType === 'text' && textNode.value) {
+                                                textContent += textNode.value;
+                                            }
+                                        });
+                                    }
+                                    p.textContent = textContent;
+                                    content.appendChild(p);
+                                }
+                                // 다른 nodeType(예: heading)에 대한 처리도 추가할 수 있습니다.
+                            });
+                        }
+                        
+                        newsItem.appendChild(titleWrapper);
+                        newsItem.appendChild(content);
+                        newsListContainer.appendChild(newsItem);
+
+                        // 제목 클릭 시 내용 토글 이벤트
+                        titleWrapper.addEventListener('click', () => {
+                            const isVisible = content.style.display === 'block';
+                            content.style.display = isVisible ? 'none' : 'block';
+                        });
+                    });
+                } else {
+                    newsListContainer.innerHTML = '<p>게시된 새소식이 없습니다.</p>';
+                }
+            })
+            .catch((error) => {
+                console.error('Error fetching news from Contentful:', error);
+                newsListContainer.innerHTML = '<p>새소식을 불러오는 데 실패했습니다.</p>';
+            });
+    </script>
+
      <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
